@@ -23,9 +23,6 @@ interface ISummaryCardProps {
     variant?: 'green';
 }
 
-
-
-
 export const SummaryCard = styled.div<ISummaryCardProps>`
 
 background-color: ${props => props.theme["gray-600"]};

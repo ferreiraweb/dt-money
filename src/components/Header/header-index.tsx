@@ -1,5 +1,5 @@
-import { HeaderContainer } from "./Header.styles";
-import { HeaderContent } from "./Header.styles";
+import { HeaderContainer } from "./header-styles";
+import { HeaderContent } from "./header-styles";
 import logoImg from "../../assets/Logo.svg";
 
 export function Header() {

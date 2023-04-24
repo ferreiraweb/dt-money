@@ -3,7 +3,7 @@ import {
   SummaryCardBody,
   SummaryCardHeader,
   SummaryContainer,
-} from "./summary.styles";
+} from "./summary-styles";
 
 import {
   ArrowCircleUp,
