@@ -2,11 +2,17 @@ import { ThemeProvider } from "styled-components";
 import { Home } from "./pages/Home/home-index";
 import { GlobalStyel } from "./styles/global";
 import { defaultTheme } from "./styles/themes/default";
+import {
+  TransactionContext,
+  TransactionContextProvider,
+} from "./contexts/transaction-context";
 
 export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Home />
+      <TransactionContextProvider>
+        <Home />
+      </TransactionContextProvider>
       <GlobalStyel />
     </ThemeProvider>
   );

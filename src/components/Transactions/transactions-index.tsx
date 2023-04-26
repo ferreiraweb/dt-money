@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { TransactionContext } from "../../contexts/transaction-context";
 import { SearchForm } from "./components/search-form-index";
 import {
   PriceHighLight,
@@ -6,27 +8,27 @@ import {
 } from "./transactions-styles";
 
 export function Transactions() {
+  const { transactionsList } = useContext(TransactionContext);
+
   return (
     <TransactionContainer>
       <SearchForm />
       <TransactionTable>
         <tbody>
-          <tr>
-            <td>Desenvolvimento de site</td>
-            <td>
-              <PriceHighLight variant="up">R$ 12.000,00</PriceHighLight>
-            </td>
-            <td>Venda</td>
-            <td>13/04/2023</td>
-          </tr>
-          <tr>
-            <td>Hamburger</td>
-            <td>
-              <PriceHighLight variant="down">-R$ 59,00</PriceHighLight>
-            </td>
-            <td>Alimentação</td>
-            <td>10/04/2023</td>
-          </tr>
+          {transactionsList.map((item) => {
+            return (
+              <tr key={item.id}>
+                <td>{item.description}</td>
+                <td>
+                  <PriceHighLight variant={item.type}>
+                    {item.price}
+                  </PriceHighLight>
+                </td>
+                <td>{item.category}</td>
+                <td>{item.createAt}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </TransactionTable>
     </TransactionContainer>
