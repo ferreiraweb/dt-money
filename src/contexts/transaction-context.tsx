@@ -1,11 +1,11 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { ITransactionItem } from "../@types/transactions-types";
 
-interface ITransactionContextType {
-  transactionsList: ITransactionItem[];
-}
+type ITransactionContextType = {
+  transactions: ITransactionItem[];
+};
 
-export const TransactionContext = createContext({} as ITransactionContextType);
+export const TransactionsContext = createContext({} as ITransactionContextType);
 
 interface ITransactionContextProviderProps {
   children: ReactNode;
@@ -14,25 +14,21 @@ interface ITransactionContextProviderProps {
 export function TransactionContextProvider({
   children,
 }: ITransactionContextProviderProps) {
-  const [transactionsList, setTransactionList] = useState<ITransactionItem[]>(
-    []
-  );
+  const [transactions, setTransactions] = useState<ITransactionItem[]>([]);
 
   useEffect(() => {
-    const getTransaction = async () => {
+    async function getTransactionsAll() {
       await fetch("http://localhost:3000/transaction")
         .then((response) => response.json())
-        .then((json) => {
-          setTransactionList(json);
-        });
-    };
+        .then((json) => setTransactions(json));
+    }
 
-    getTransaction();
+    getTransactionsAll();
   }, []);
 
   return (
-    <TransactionContext.Provider value={{ transactionsList }}>
+    <TransactionsContext.Provider value={{ transactions }}>
       {children}
-    </TransactionContext.Provider>
+    </TransactionsContext.Provider>
   );
 }
